@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+</head>
+<body>
+
+    <h1>Cadastrar Senha</h1>
+
+    <input type="text" id="desc" placeholder="Descrição da Senha"><br><br>
+    <input type="password" id="senha" placeholder="Senha"><br><br>
+    <button onclick="cadastrar()">Cadastrar</button>
+
+
+    <script>
+        function cadastrar() {
+            let desc = document.getElementById("desc").value.trim();
+            let senha = document.getElementById("senha").value.trim();
+
+            if (desc === "" || senha === "") {
+                alert("Preencha as informações!");
+                return;
+            }
+
+            let senhaHash = CryptoJS.SHA512(senha).toString();
+            localStorage.setItem("senha" + desc, senhaHash);
+
+            alert("Senha Cadastrada!");
+            window.location.href = "consultar.html";
+        }
+    </script>
+</body>
+</html>

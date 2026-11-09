@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultar</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+</head>
+<body>
+    
+    <h1>Consultar Senha</h1>
+
+    <input type="password" id="senha" placeholder="Senha"><br><br>
+    <button onclick="consultar()">Consultar</button>
+
+    <script>
+        function consultar() {
+        let desc = document.getElementById("desc").value.trim();
+        let senha = document.getElementById("senha").value.trim();
+
+        if (desc === "" || senha === "") {
+            alert("Preencha as informações!");
+            return;
+        }
+
+        let senhaHash = CriptoJS.SHA512(senha).toString();
+        let senhaCadastrada = localStorage.setItem(desc);
+
+        if (senhaCadastrada === null) {
+            alert("Descrição não encontrada");
+            return;
+        }
+
+        if (senhaCadastrada === senhaHash) {
+            alert("Senha Encontrada");
+        }
+    }
+    </script>
+</body>
+</html>
